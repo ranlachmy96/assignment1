@@ -46,9 +46,15 @@ PUT /familyReunification: Update details of an existing family reunification cas
 
 DELETE /familyReunification/{id}: Delete an active family reunification case by ID.
 
+### postman API
+
+  link: https://documenter.getpostman.com/view/32171508/2s9YyqiMw3
+
 ### Morgan Logging
 
 This project uses Morgan for logging HTTP requests. The logging format includes the date.
+
+
 
 
 
