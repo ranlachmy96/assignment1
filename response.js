@@ -1,7 +1,7 @@
 //Response
-const statusCode = (res,code,response) => {
+const statusCode = (res, code, response) => {
 
-    switch (code){
+    switch (code) {
         case 200 :
             res.statusCode = 200;
             res.setHeader("Content-Type", "text/plain");
@@ -15,17 +15,17 @@ const statusCode = (res,code,response) => {
         case 400:
             res.statusCode = 400;
             res.setHeader("Content-Type", "text/plain");
-            res.end(JSON.stringify({ message: response }));
+            res.end(JSON.stringify({message: response}));
             break;
         case 404 :
             res.statusCode = 404;
             res.setHeader("Content-Type", "text/plain");
-            res.end(JSON.stringify({ message: response }));
+            res.end(JSON.stringify({message: response}));
             break;
         case 500:
             res.statusCode = 500; // Internal Server Error
             res.setHeader("Content-Type", "text/plain");
-            res.end(JSON.stringify({ message: response }));
+            res.end(JSON.stringify({message: response}));
             break;
     }
 }

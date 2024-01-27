@@ -1,1 +1,61 @@
-{"reunificationCase":[{"id":1,"parents":["John Doe","Jane Doe"],"children":["Emily Doe","Michael Doe","Sophie Doe"],"active":true,"reunion_date":"2024-08-15","reunion_location":"City Park, Anytown"},{"id":2,"parents":["Alice Smith","Bob Smith"],"children":["Charlie Smith","David Smith"],"active":true,"reunion_date":"2024-09-20","reunion_location":"pisgat zeev, Jerusalem"},{"id":3,"parents":["Eva Johnson","George Johnson"],"children":["Olivia Johnson","Liam Johnson"],"active":false,"reunion_date":null,"reunion_location":null},{"id":4,"parents":["Alice Brown","Bob Brown"],"children":["Emma Brown","Noah Brown"],"active":true,"reunion_date":"2024-02-01","reunion_location":"Tel-Aviv"}]}
+{
+  "reunificationCase": [
+    {
+      "id": 1,
+      "parents": [
+        "John Doe",
+        "Jane Doe"
+      ],
+      "children": [
+        "Emily Doe",
+        "Michael Doe",
+        "Sophie Doe"
+      ],
+      "active": true,
+      "reunion_date": "2024-08-15",
+      "reunion_location": "City Park, Anytown"
+    },
+    {
+      "id": 2,
+      "parents": [
+        "Alice Smith",
+        "Bob Smith"
+      ],
+      "children": [
+        "Charlie Smith",
+        "David Smith"
+      ],
+      "active": true,
+      "reunion_date": "2024-09-20",
+      "reunion_location": "pisgat zeev, Jerusalem"
+    },
+    {
+      "id": 3,
+      "parents": [
+        "Eva Johnson",
+        "George Johnson"
+      ],
+      "children": [
+        "Olivia Johnson",
+        "Liam Johnson"
+      ],
+      "active": false,
+      "reunion_date": null,
+      "reunion_location": null
+    },
+    {
+      "id": 4,
+      "parents": [
+        "Alice Brown",
+        "Bob Brown"
+      ],
+      "children": [
+        "Emma Brown",
+        "Noah Brown"
+      ],
+      "active": true,
+      "reunion_date": "2024-02-01",
+      "reunion_location": "City Park"
+    }
+  ]
+}
