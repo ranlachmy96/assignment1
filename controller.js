@@ -1,7 +1,6 @@
 const fs = require('fs');
 const {
     getAllReunificationCase,
-    getActiveReunificationCase,
     postReunificationCase,
 } = require("./repository");
 const { statusCode } = require("./response")
@@ -48,7 +47,7 @@ const readActiveReunificationCase = (req, res) => {
 const readReunificationCase = (req, res) => {
     const url = req.url;
     const caseId = parseInt(url.split("/")[2]);
-    const response = getActiveReunificationCase();
+    const response = getAllReunificationCase();
     const result = response.reunificationCase.find(item => item.id === caseId && item.active === true);
     if (result) {
         statusCode(res,200,result);
@@ -79,7 +78,7 @@ const deleteReunificationCase = (req, res) => {
     try {
         const url = req.url;
         const caseId = parseInt(url.split("/")[2]);
-        const existingData = getActiveReunificationCase();
+        const existingData = getAllReunificationCase();
         const existingCaseIndex = existingData.reunificationCase.findIndex(item => item.id === caseId);
 
         if (existingCaseIndex === -1) {

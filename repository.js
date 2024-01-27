@@ -1,4 +1,3 @@
-const data = require("./data.json")
 const fs = require("fs");
 
 //GET
@@ -11,9 +10,9 @@ const getAllReunificationCase = () => {
         return { reunificationCase: [] };
     }
 };
-const getActiveReunificationCase = () =>{
-    return data;
-};
+// const getActiveReunificationCase = () =>{
+//     return data;
+// };
 const postReunificationCase = (newCase) => {
     const jsonString = JSON.stringify(newCase);
     const file = fs.createWriteStream("./data.json");
@@ -21,4 +20,4 @@ const postReunificationCase = (newCase) => {
     file.end();
     return "Done Successfully";
 };
-module.exports = { getActiveReunificationCase,getAllReunificationCase,postReunificationCase }
+module.exports = { getAllReunificationCase,postReunificationCase }
