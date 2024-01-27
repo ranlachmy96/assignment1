@@ -2,7 +2,7 @@ const data = require("./data.json")
 const fs = require("fs");
 
 //GET
-const getAllActiveReunificationCase = () => {
+const getAllReunificationCase = () => {
     try {
         const data = fs.readFileSync("./data.json", "utf-8");
         return JSON.parse(data);
@@ -21,4 +21,4 @@ const postReunificationCase = (newCase) => {
     file.end();
     return "Done Successfully";
 };
-module.exports = { getActiveReunificationCase,getAllActiveReunificationCase,postReunificationCase }
+module.exports = { getActiveReunificationCase,getAllReunificationCase,postReunificationCase }

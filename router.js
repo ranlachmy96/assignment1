@@ -3,32 +3,37 @@ const {
     deleteReunificationCase,
     readReunificationCase,
     bodyParser,
-    handleRequest
+    createReunificationCase,
+    updateReunificationCase
 } = require("./controller");
 
-const router = (req,res) => {
-    const { method, url } = req;
+const {statusCode} = require("./response")
+
+const router = (req, res) => {
+    const {method, url} = req;
     const parts = url.split('/');
     const route = parts[1];
-    if (method === 'GET' && route === 'familyReunification' && parts.length === 2){
-        readActiveReunificationCase(req,res);
-    } else if (method === 'GET' && route === 'familyReunification' && parts.length >= 3){
-        readReunificationCase(req,res);
-    } else if (method === 'POST' && route === 'familyReunification'){
+    if (method === 'GET' && route === 'familyReunification' && parts.length === 2) {
+        readActiveReunificationCase(req, res);
+    } else if (method === 'GET' && route === 'familyReunification' && parts.length >= 3) {
+        readReunificationCase(req, res);
+    } else if ((method === 'POST' || method === 'PUT') && route === 'familyReunification') {
         bodyParser(req, res, () => {
-            handleRequest(req, res);
+            const requestData = req.body;
+            switch (method) {
+                case 'POST':
+                    createReunificationCase(requestData, res);
+                    break;
+                case 'PUT':
+                    updateReunificationCase(requestData, res);
+                    break;
+            }
         });
-    } else if (method === 'PUT' && route === 'familyReunification'){
-        bodyParser(req, res, () => {
-            handleRequest(req, res);
-        });
-    } else if (method === 'DELETE' && route === 'familyReunification'){
-        deleteReunificationCase(req,res);
+    } else if (method === 'DELETE' && route === 'familyReunification') {
+        deleteReunificationCase(req, res);
     } else {
-        res.statusCode = 404;
-        res.setHeader("Content-Type", "text/plain");
-        res.end("Invalid route");
+        statusCode(res, 404, "Invalid route");
     }
 };
 
-module.exports = { router }
+module.exports = {router}
