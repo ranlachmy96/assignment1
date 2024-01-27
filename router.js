@@ -1,4 +1,8 @@
 //router
+/******************************************************************************
+ Importing controller functions and response-related utilities.
+ *******************************************************************************/
+
 const {
     readActiveReunificationCase,
     deleteReunificationCase,
@@ -7,8 +11,12 @@ const {
     createReunificationCase,
     updateReunificationCase
 } = require("./controller");
-
 const {statusCode} = require("./response")
+
+/******************************************************************************
+ Router function that handles incoming requests
+ and routes them to the appropriate controller function.
+ *******************************************************************************/
 
 const router = (req, res) => {
     const {method, url} = req;

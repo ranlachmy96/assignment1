@@ -1,4 +1,9 @@
 //Response
+/***************************************************************************************
+ Function to set the HTTP status code and send a
+ response based on the provided code and response data.
+ ***************************************************************************************/
+
 const statusCode = (res, code, response) => {
 
     switch (code) {

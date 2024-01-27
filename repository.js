@@ -1,5 +1,14 @@
 //repository
+/******************************************************************************
+ Importing the (file system) module for file operations.
+ *******************************************************************************/
+
 const fs = require("fs");
+
+/******************************************************************************
+ Function to retrieve all family reunification cases from the data.json file.
+ *******************************************************************************/
+
 const getAllReunificationCase = () => {
     try {
         const data = fs.readFileSync("./data.json", "utf-8");
@@ -9,6 +18,10 @@ const getAllReunificationCase = () => {
         return {reunificationCase: []};
     }
 };
+/******************************************************************************
+ Function to save a new set of family reunification cases to the data.json file
+ *******************************************************************************/
+
 const postReunificationCase = (newCase) => {
     const jsonString = JSON.stringify(newCase);
     const file = fs.createWriteStream("./data.json");

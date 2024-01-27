@@ -42,20 +42,6 @@
       "active": false,
       "reunion_date": null,
       "reunion_location": null
-    },
-    {
-      "id": 4,
-      "parents": [
-        "Alice Brown",
-        "Bob Brown"
-      ],
-      "children": [
-        "Emma Brown",
-        "Noah Brown"
-      ],
-      "active": true,
-      "reunion_date": "2024-02-01",
-      "reunion_location": "City Park"
     }
   ]
 }
