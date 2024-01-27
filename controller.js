@@ -36,25 +36,28 @@ const bodyParser = (req, res, next) => {
     });
 };
 const handleRequest = (req, res) => {
-    // Assuming req.body is already populated by a middleware
-    const newReunificationCase = req.body;
-    createReunificationCase(newReunificationCase, res);
+    const requestData = req.body;
+    switch (req.method) {
+        case 'POST':
+            createReunificationCase(requestData, res);
+            break;
+        case 'PUT':
+            updateReunificationCase(requestData, res);
+            break;
+        default:
+    }
 };
 //POST
 const createReunificationCase = (newReunificationCase, res) => {
-    // const newReunificationCase = req.body;
-    // console.log('newReunificationCase:', newReunificationCase);
     if (checkIdValidity(newReunificationCase.id) === false) {
         res.statusCode = 400;
         res.setHeader("Content-Type", "text/plain");
         res.end("Reunification case Id all ready exists or sent incorrectly");
     } else {
         let existingData = getAllActiveReunificationCase();
-
         existingData.reunificationCase.push(newReunificationCase);
         console.log('addedData:', existingData);
         const response = postReunificationCase(existingData);
-
         res.statusCode = 201;
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(response));
@@ -67,7 +70,6 @@ const readActiveReunificationCase = (req, res) => {
     res.setHeader("Content-Type", "text/plain");
     res.end(JSON.stringify(response));
 }
-
 const readReunificationCase = (req, res) => {
     const url = req.url;
     const caseId = parseInt(url.split("/")[2]);
@@ -84,25 +86,58 @@ const readReunificationCase = (req, res) => {
     }
 }
 //PUT
-const updateCaseDetails = (req, res) => {
-    const url = req.url;
-    const caseId = parseInt(url.split("/")[2]);
-    const response = putReunificationCase(caseId);
-    res.statusCode = 201;
-    res.setHeader("content-Type", "text/plain");
-    res.end(JSON.stringify(response));
-}
+const updateReunificationCase = (updatedData, res) => {
+    try {
+        let existingData = getAllActiveReunificationCase();
+        const existingCaseIndex = existingData.reunificationCase.findIndex(item => item.id === updatedData.id);
+
+        if (existingCaseIndex === -1) {
+            res.statusCode = 404;
+            res.setHeader("Content-Type", "text/plain");
+            res.end("Reunification case not found");
+        } else {
+            existingData.reunificationCase[existingCaseIndex] = {...existingData.reunificationCase[existingCaseIndex], ...updatedData};
+            const response = postReunificationCase(existingData);
+
+            res.statusCode = 200;
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({message: response}));
+        }
+    } catch (error) {
+        console.error('Error in updateReunificationCase:', error.message);
+        res.statusCode = 500; // Internal Server Error
+        res.setHeader("Content-Type", "text/plain");
+        res.end("Internal Server Error");
+    }
+};
 //DELETE
-const deleteCompletedOrCancelledRequest = (req, res) => {
-    const url = req.url;
-    const caseId = parseInt(url.split("/")[2]);
-    const response = deleteRequest(caseId);
-    res.statusCode = 201;
-    res.setHeader("content-Type", "text/plain");
-    res.end(JSON.stringify(response));
-}
+const deleteReunificationCase = (req, res) => {
+    try {
+        const url = req.url;
+        const caseId = parseInt(url.split("/")[2]);
+        const existingData = getActiveReunificationCase();
+        const existingCaseIndex = existingData.reunificationCase.findIndex(item => item.id === caseId);
+
+        if (existingCaseIndex === -1) {
+            res.statusCode = 404;
+            res.setHeader("Content-Type", "text/plain");
+            res.end("Reunification case not found");
+        } else {
+            existingData.reunificationCase.splice(existingCaseIndex, 1);
+            const response = postReunificationCase(existingData);
+            res.statusCode = 200;
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({ message: response }));
+        }
+    } catch (error) {
+        console.error('Error in deleteReunificationCase:', error.message);
+        res.statusCode = 500; // Internal Server Error
+        res.setHeader("Content-Type", "text/plain");
+        res.end("Internal Server Error");
+    }
+};
 module.exports = {
     readActiveReunificationCase, createReunificationCase,
-    updateCaseDetails, deleteCompletedOrCancelledRequest, readReunificationCase,handleRequest,
+    updateReunificationCase, deleteReunificationCase, readReunificationCase, handleRequest,
     bodyParser
 }

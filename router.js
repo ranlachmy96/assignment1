@@ -1,8 +1,6 @@
 const {
-    createReunificationCase,
     readActiveReunificationCase,
-    updateCaseDetails,
-    deleteCompletedOrCancelledRequest,
+    deleteReunificationCase,
     readReunificationCase,
     bodyParser,
     handleRequest
@@ -21,9 +19,11 @@ const router = (req,res) => {
             handleRequest(req, res);
         });
     } else if (method === 'PUT' && route === 'familyReunification'){
-        updateCaseDetails(req,res);
+        bodyParser(req, res, () => {
+            handleRequest(req, res);
+        });
     } else if (method === 'DELETE' && route === 'familyReunification'){
-        deleteCompletedOrCancelledRequest(req,res);
+        deleteReunificationCase(req,res);
     } else {
         res.statusCode = 404;
         res.setHeader("Content-Type", "text/plain");

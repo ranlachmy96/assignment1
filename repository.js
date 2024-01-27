@@ -17,18 +17,8 @@ const getActiveReunificationCase = () =>{
 const postReunificationCase = (newCase) => {
     const jsonString = JSON.stringify(newCase);
     const file = fs.createWriteStream("./data.json");
-
     file.write(jsonString);
     file.end();
-
-    return "Successfully entered a new case";
+    return "Done Successfully";
 };
-
-// const putReunificationCase = (id,updatedCase) =>{
-//     const index = data.findIndex((reunificationCase) => reunificationCase.id === id );
-//     if (index !== -1) {
-//         data[index] = {...data[index], ...updatedCase};
-//         return data[index];
-//     }
-// }
 module.exports = { getActiveReunificationCase,getAllActiveReunificationCase,postReunificationCase }
