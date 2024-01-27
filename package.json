@@ -1,0 +1,16 @@
+{
+  "name": "assignment1",
+  "version": "1.0.0",
+  "description": "first assignment in Internet web services course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ran",
+  "license": "ISC",
+  "dependencies": {
+    "http": "^0.0.1-security",
+    "morgan": "^1.10.0"
+  }
+}
